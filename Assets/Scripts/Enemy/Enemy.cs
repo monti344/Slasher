@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _damage;
     [SerializeField] private float _health;
     [SerializeField] private float _cooldown;
+    [SerializeField] private DamageNumber _damageNumber;
 
     private float _currentTime;
 
@@ -38,6 +39,8 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         _health -= damage;
+        _damageNumber.ShowDamage(damage);
+
         if(_health <= 0)
         {
             Instantiate(_soul, transform.position, Quaternion.identity);

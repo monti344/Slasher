@@ -9,12 +9,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float _energi;
     [SerializeField] private float _energyRecoveryRate;
     [SerializeField] private float _recoveredEnergy;
+    [SerializeField] private DamageNumber _damageNumber;
 
     private float _currentHealth;
     private float _currentEnergi;
     private float _curentTime;
-
-    public float CurrentEnergi => _currentEnergi;
 
     public event UnityAction<float, float> HealthChanged;
     public event UnityAction<float, float> EnergiChanged;
@@ -34,6 +33,8 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         _currentHealth -= damage;
+        _damageNumber.ShowDamage(damage);
+
         if(_currentHealth <= 0)
         {
             Dead?.Invoke();
@@ -63,5 +64,11 @@ public class Player : MonoBehaviour
             EnergiChanged?.Invoke(_currentEnergi, _energi);
             _curentTime = 0;
         }
+    }
+
+    public bool CheckEnergi(float energyCost)
+    {
+        bool isEnergy;
+        return isEnergy = energyCost <= _currentEnergi;
     }
 }

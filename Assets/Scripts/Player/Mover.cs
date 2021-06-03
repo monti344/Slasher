@@ -74,7 +74,7 @@ public class Mover : MonoBehaviour
 
     private void Desh()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && _player.CurrentEnergi >= _energyCost)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _player.CheckEnergi(_energyCost))
         {
             StartCoroutine(StartDash());
             _player.SpendEnergy(_energyCost);
